@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+    mongo:
+        container_name: MongoDB
+        image: mongo:latest
+        restart: unless-stopped
+        ports:
+            - 27017:27017
+        volumes:
+            - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            - mongodb:/data/db
+            - mongodb_config:/data/configdb
+        networks:
+            mongo-network:
+
+volumes:
+    mongodb:
+    mongodb_config:
+
+networks:
+    mongo-network:
+        driver: bridge

@@ -1,0 +1,22 @@
+services:
+  rabbitmq:
+    container_name: RabbitMQ
+    image: rabbitmq:3-management-alpine
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ./init.sh:/scripts/init.sh
+        - rabbitData:/var/lib/rabbitmq/
+        - rabbitLog:/var/log/rabbitmq
+    entrypoint: ["bash", "/scripts/init.sh" ]
+    env_file:
+        - ./.env/
+    environment:
+        RABBITMQ_PID_FILE: /var/lib/rabbitmq/mnesia/rabbitmq
+        RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+        RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+
+volumes:
+  rabbitData:
+  rabbitLog:

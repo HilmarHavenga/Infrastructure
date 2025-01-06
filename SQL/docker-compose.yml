@@ -1,0 +1,21 @@
+services:
+  mssql:
+    container_name: MSSQL
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    env_file: 
+      - ./.env
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: ${MSSQL_DEFAULT_PASS}
+      TZ: Africa/Johannesburg
+      MSSQL_PID: Developer
+      MSSQL_MEMORY_LIMIT_MB: 2048
+      MSSQL_AGENT_ENABLED: "true"
+    ports:
+      - 1433:1433
+    volumes:
+      - sqlData:/var/opt/mssql
+    restart: unless-stopped
+
+volumes:
+    sqlData:
