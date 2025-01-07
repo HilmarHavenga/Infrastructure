@@ -6,3 +6,5 @@ cd ..\SQL\
 docker-compose up -d
 cd ..\ArangoDB\
 docker-compose up -d
+cd ..\Postgresql\
+docker-compose up -d

@@ -7,8 +7,8 @@ services:
         - 15672:15672
     volumes:
         - ./init.sh:/scripts/init.sh
-        - rabbitData:/var/lib/rabbitmq/
-        - rabbitLog:/var/log/rabbitmq
+        - rabbit_data:/var/lib/rabbitmq/
+        - rabbit_log:/var/log/rabbitmq
     entrypoint: ["bash", "/scripts/init.sh" ]
     env_file:
         - ./.env/
@@ -18,5 +18,5 @@ services:
         RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
 
 volumes:
-  rabbitData:
-  rabbitLog:
+  rabbit_data:
+  rabbit_log:
